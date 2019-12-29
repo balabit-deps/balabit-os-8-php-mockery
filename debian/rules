@@ -1,0 +1,31 @@
+#!/usr/bin/make -f
+%:
+	dh $@ --with phpcomposer,sphinxdoc
+
+override_dh_auto_build:
+	phpab \
+		--template debian/autoload.php.tpl \
+		--output library/Mockery/autoload.php \
+		library
+	mkdir --parents vendor
+	phpab \
+		--template debian/autoload.tests.php.tpl \
+		--output vendor/autoload.php \
+		tests
+	cp -a library/helpers.php library/Mockery/helpers.php
+	# Build user documentation
+	$(MAKE) -C docs html
+
+override_dh_auto_clean:
+	dh_auto_clean -O--sourcedirectory=docs
+
+override_dh_install:
+	dh_install
+	rm -f debian/php-mockery/usr/share/php/helpers.php
+
+override_dh_auto_test:
+ifeq (,$(findstring nocheck, $(DEB_BUILD_OPTIONS)))
+	phpunit --include-path library
+else
+	@echo "** tests disabled"
+endif

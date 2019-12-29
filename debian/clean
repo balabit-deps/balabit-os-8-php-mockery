@@ -1,0 +1,4 @@
+.phpunit.result.cache
+library/Mockery/autoload.php
+library/Mockery/helpers.php
+vendor/

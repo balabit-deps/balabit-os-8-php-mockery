@@ -1,0 +1,37 @@
+Source: php-mockery
+Section: php
+Priority: optional
+Maintainer: Debian PHP PEAR Maintainers <pkg-php-pear@lists.alioth.debian.org>
+Uploaders: David Prévot <taffit@debian.org>
+Build-Depends: debhelper-compat (= 12),
+               php-hamcrest,
+               php-redis,
+               phpab,
+               phpunit,
+               pkg-php-tools,
+               python3-sphinx,
+               python3-sphinx-rtd-theme
+Standards-Version: 4.4.1
+Homepage: http://docs.mockery.io
+Vcs-Git: https://salsa.debian.org/php-team/pear/php-mockery.git
+Vcs-Browser: https://salsa.debian.org/php-team/pear/php-mockery
+
+Package: php-mockery
+Architecture: all
+Depends: ${misc:Depends}, ${phpcomposer:Debian-require}
+Recommends: ${phpcomposer:Debian-recommend}
+Suggests: php-mockery-doc, ${phpcomposer:Debian-suggest}
+Replaces: ${phpcomposer:Debian-replace}
+Breaks: ${phpcomposer:Debian-conflict}, ${phpcomposer:Debian-replace}
+Provides: ${phpcomposer:Debian-provide}
+Description: mock object framework for PHPUnit and other testing framework
+ ${phpcomposer:description}.
+
+Package: php-mockery-doc
+Section: doc
+Architecture: all
+Depends: ${misc:Depends}, ${sphinxdoc:Depends}
+Description: mock object framework for PHPUnit - documentation
+ This package provides the documentation for php-mockery.
+ .
+ ${phpcomposer:description}.
